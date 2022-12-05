@@ -41,11 +41,6 @@ impl Symbol {
     }
 }
 
-pub fn day2(puzzle_input: &PuzzleInput) {
-    println!("Part 1: {}", part1(puzzle_input));
-    println!("Part 2: {}", part2(puzzle_input));
-}
-
 fn parse_input_part1(lines: &[String]) -> Vec<(Symbol, Symbol)> {
     fn to_symbol(symbol: &str) -> Symbol {
         match symbol {
@@ -65,7 +60,7 @@ fn parse_input_part1(lines: &[String]) -> Vec<(Symbol, Symbol)> {
         .collect()
 }
 
-fn part1(input: &[String]) -> i64 {
+pub fn part1(input: &[String]) -> i64 {
     parse_input_part1(input)
         .iter()
         .map(|game| {
@@ -106,7 +101,7 @@ fn parse_input_part2(lines: &[String]) -> Vec<(Symbol, Outcome)> {
         .collect()
 }
 
-fn part2(input: &[String]) -> i64 {
+pub fn part2(input: &[String]) -> i64 {
     parse_input_part2(input)
         .iter()
         .map(|game| match game {

@@ -1,20 +1,16 @@
 use crate::util::PuzzleInput;
 
-fn parse_input(lines: &[String]) -> Vec<Option<i128>> {
-    lines.iter().map(|l| l.parse::<i128>().ok()).collect()
+fn parse_input(lines: &[String]) -> Vec<Option<i64>> {
+    lines.iter().map(|l| l.parse::<i64>().ok()).collect()
 }
 
-pub fn day1(puzzle_input: &PuzzleInput) {
-    let input = parse_input(puzzle_input);
-    println!("Part 1: {}", part1(&input));
-    println!("Part 2: {}", part2(&input))
-}
+pub fn part1(puzzle_input: &PuzzleInput) -> i64 {
+    let puzzle_input = parse_input(puzzle_input);
 
-fn part1(lines: &[Option<i128>]) -> i128 {
     let mut max = None;
     let mut acc = 0;
 
-    for cal in lines {
+    for cal in puzzle_input {
         match cal {
             Some(num) => acc += num,
             None => {
@@ -29,8 +25,8 @@ fn part1(lines: &[Option<i128>]) -> i128 {
     max.unwrap_or(0)
 }
 
-fn part2(lines: &[Option<i128>]) -> i128 {
-    let mut res = lines
+pub fn part2(puzzle_input: &PuzzleInput) -> i64 {
+    let mut res = parse_input(puzzle_input)
         .split(Option::is_none)
         .map(|elf| elf.iter().flatten().sum())
         .collect::<Vec<_>>();

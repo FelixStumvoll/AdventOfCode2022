@@ -22,7 +22,29 @@ macro_rules! run_day {
     ($day:expr) => {
         println!("***** Day {} *****", $day);
         paste::paste! {
-            crate::solutions::[<day $day>]::[<day $day>](&crate::util::read_input_for_day($day));
+            let input = &util::read_input_for_day($day);
+            let part1 = solutions::[<day $day>]::part1(&input);
+            let part2 = solutions::[<day $day>]::part2(&input);
+            println!("Part 1: {}", part1);
+            println!("Part 2: {}", part2);
+        }
+    };
+
+    ($day:expr, 1) => {
+        println!("***** Day {} *****", $day);
+        paste::paste! {
+            let input = &util::read_input_for_day($day);
+            let part1 = solutions::[<day $day>]::part1(&input);
+            println!("Part 1: {}", part1);
+        }
+    };
+
+    ($day:expr, 2) => {
+        println!("***** Day {} *****", $day);
+        paste::paste! {
+            let input = &util::read_input_for_day($day);
+            let part2 = solutions::[<day $day>]::part2(&input);
+            println!("Part 2: {}", part2);
         }
     };
 }
