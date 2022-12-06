@@ -5,4 +5,5 @@ mod util;
 fn main() {
     run_day!(1);
     run_day!(2);
+    run_day!(3, 1);
 }
