@@ -60,7 +60,7 @@ fn parse_input_part1(lines: &[String]) -> Vec<(Symbol, Symbol)> {
         .collect()
 }
 
-pub fn part1(input: &[String]) -> i64 {
+pub fn part1(input: &PuzzleInput) -> i64 {
     parse_input_part1(input)
         .iter()
         .map(|game| {
@@ -101,7 +101,7 @@ fn parse_input_part2(lines: &[String]) -> Vec<(Symbol, Outcome)> {
         .collect()
 }
 
-pub fn part2(input: &[String]) -> i64 {
+pub fn part2(input: &PuzzleInput) -> i64 {
     parse_input_part2(input)
         .iter()
         .map(|game| match game {
