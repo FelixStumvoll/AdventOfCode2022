@@ -1,6 +1,7 @@
 use crate::util::PuzzleInput;
 use regex::Regex;
 use std::collections::{HashMap, VecDeque};
+use std::iter::zip;
 
 type Stacks = HashMap<usize, VecDeque<char>>;
 type StackPos = usize;
@@ -18,13 +19,8 @@ fn parse_input(puzzle_input: &PuzzleInput) -> (Stacks, Vec<MoveInstruction>) {
 
     'stack_parsing: for line in puzzle_input {
         lines_to_skip += 1;
-        let mut stack: usize = 1;
 
-        for (index, char) in line.chars().enumerate() {
-            if index != 0 && index % 4 == 0 {
-                stack += 1;
-            }
-
+        for (char, stack) in zip(line.chars().skip(1).step_by(4), 1..) {
             match char {
                 'A'..='Z' => stacks.entry(stack).or_default().push_back(char),
                 '1' => break 'stack_parsing,
