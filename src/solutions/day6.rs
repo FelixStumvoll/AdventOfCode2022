@@ -13,7 +13,7 @@ pub fn part1(puzzle_input: &PuzzleInput) -> i64 {
         }
     }
 
-    0
+    unreachable!()
 }
 
 pub fn part2(puzzle_input: &PuzzleInput) -> i64 {
@@ -27,5 +27,5 @@ pub fn part2(puzzle_input: &PuzzleInput) -> i64 {
         }
     }
 
-    0
+    unreachable!()
 }

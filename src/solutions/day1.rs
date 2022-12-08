@@ -22,7 +22,7 @@ pub fn part1(puzzle_input: &PuzzleInput) -> i64 {
         }
     }
 
-    max.unwrap_or(0)
+    max.unwrap()
 }
 
 pub fn part2(puzzle_input: &PuzzleInput) -> i64 {
