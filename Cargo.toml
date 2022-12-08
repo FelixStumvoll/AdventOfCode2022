@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 paste = "1.0.9"
 regex = "1.7.0"
+seq-macro = "0.3"

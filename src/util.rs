@@ -19,7 +19,7 @@ fn read_as_lines(path: &Path) -> PuzzleInput {
 }
 
 macro_rules! run_day {
-    ($day:expr) => {
+    ($day:literal) => {
         println!("***** Day {} *****", $day);
         paste::paste! {
             let input = &util::read_input_for_day($day);
