@@ -1,8 +1,9 @@
 use crate::solutions::day9::Direction::{Down, Left, Right, Up};
 use crate::util::PuzzleInput;
 use std::collections::HashSet;
-use std::iter::zip;
+use std::iter::{repeat, zip};
 
+#[derive(Copy, Clone)]
 enum Direction {
     Up,
     Down,
@@ -23,12 +24,10 @@ impl Direction {
 
 type Pos = (i64, i64);
 
-type Move = (Direction, usize);
-
-fn parse_input(puzzle_input: &PuzzleInput) -> Vec<Move> {
+fn parse_input(puzzle_input: &PuzzleInput) -> Vec<Direction> {
     puzzle_input
         .iter()
-        .map(|line| {
+        .flat_map(|line| {
             let (dir, amount) = line.split_at(1);
             let amount: usize = amount[1..].parse().unwrap();
 
@@ -40,7 +39,7 @@ fn parse_input(puzzle_input: &PuzzleInput) -> Vec<Move> {
                 _ => unreachable!(),
             };
 
-            (dir, amount)
+            repeat(dir).take(amount)
         })
         .collect()
 }
@@ -66,12 +65,10 @@ pub fn part1(puzzle_input: &PuzzleInput) -> usize {
 
     visited_positions.insert(tail_pos);
 
-    for (direction, amount) in &moves {
-        for _ in 0..*amount {
-            head_pos = direction.apply(head_pos);
-            tail_pos = adjust_tail(&head_pos, &tail_pos);
-            visited_positions.insert(tail_pos);
-        }
+    for direction in &moves {
+        head_pos = direction.apply(head_pos);
+        tail_pos = adjust_tail(&head_pos, &tail_pos);
+        visited_positions.insert(tail_pos);
     }
 
     visited_positions.len()
@@ -85,16 +82,14 @@ pub fn part2(puzzle_input: &PuzzleInput) -> usize {
     let mut visited_positions: HashSet<Pos> = HashSet::new();
     visited_positions.insert(rope[9]);
 
-    for (direction, amount) in &moves {
-        for _ in 0..*amount {
-            rope[0] = direction.apply(rope[0]);
+    for direction in &moves {
+        rope[0] = direction.apply(rope[0]);
 
-            for (head_idx, tail_idx) in zip(0..rope.len(), 1..rope.len()) {
-                rope[tail_idx] = adjust_tail(&rope[head_idx], &rope[tail_idx]);
-            }
-
-            visited_positions.insert(rope[9]);
+        for (head_idx, tail_idx) in zip(0..rope.len(), 1..rope.len()) {
+            rope[tail_idx] = adjust_tail(&rope[head_idx], &rope[tail_idx]);
         }
+
+        visited_positions.insert(rope[9]);
     }
 
     visited_positions.len()
